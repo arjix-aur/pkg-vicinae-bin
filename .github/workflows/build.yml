@@ -16,8 +16,10 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1.2
 
       - name: build packages
-        working-directory: /home/docker
-        run: runuser -u docker ./build.sh
+        run: |
+          cp build.sh /home/docker
+          cd /home/docker
+          runuser -u docker ./build.sh
 
       - name: Release
         uses: softprops/action-gh-release@v2
