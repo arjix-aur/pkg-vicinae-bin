@@ -16,7 +16,7 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1.2
 
       - name: build packages
-        run: ./build.sh
+        run: runuser -u docker ./build.sh
 
       - name: Release
         uses: softprops/action-gh-release@v2
