@@ -16,4 +16,4 @@ PKG='vicinae-bin'
 paru -G "$PKG"
 paru -B "$PKG" --noconfirm
 
-cp "$PKG/*.pkg.tar.zst" .
+cp "$PKG"/*.pkg.tar.zst .
