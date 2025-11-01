@@ -1,0 +1,26 @@
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: docker
+    container:
+      image: ghcr.io/arjix-aur/runner-image-arch:latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+
+      - name: build packages
+        run: ./build.sh
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: "*.pkg.tar.zst"
+          fail_on_unmatched_files: true
